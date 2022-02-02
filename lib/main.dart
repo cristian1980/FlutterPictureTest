@@ -23,11 +23,12 @@ void main() {
     ..style = PaintingStyle.fill
     ..strokeWidth = 0;
 
-  const double heartCount = 40;
+  const double heartCount = 180;
 
   double heartWidth = width/heartCount;
   double heartHeight = height/heartCount;
   String svg = "<svg height=\"$height\" viewBox=\"0 0 $width $height\" width=\"$width\" xmlns=\"http://www.w3.org/2000/svg\">\n";
+  bool generateSvgString = false;
   for (int x = 0; x < heartCount; x++) {
     for (int y = 0; y < heartCount; y++) {
       String svgPath = "<path d=\"";
@@ -38,7 +39,9 @@ void main() {
       double tmpX = 0.5 * heartWidth + offsetX;
       double tmpY = heartHeight * 0.35 + offsetY;
       path.moveTo(tmpX, tmpY);
-      svgPath+= "M" + tmpX.toStringAsFixed(2) + " " + tmpY.toStringAsFixed(2);
+      if(generateSvgString) {
+        svgPath += "M" + tmpX.toStringAsFixed(2) + " " + tmpY.toStringAsFixed(2);
+      }
 
       double tmpX1 = 0.2 * heartWidth + offsetX;
       double tmpY1 = heartHeight * 0.1 + offsetY;
@@ -47,21 +50,25 @@ void main() {
       double tmpX3 = 0.5 * heartWidth + offsetX;
       double tmpY3 = heartHeight + offsetY;
       path.cubicTo(tmpX1, tmpY1, tmpX2, tmpY2, tmpX3, tmpY3);
-      svgPath+= "C" + tmpX1.toStringAsFixed(2) +" " + tmpY1.toStringAsFixed(2)
-          + " " + tmpX2.toStringAsFixed(2) +" " + tmpY2.toStringAsFixed(2)
-          + " " + tmpX3.toStringAsFixed(2) +" " + tmpY3.toStringAsFixed(2);
-
+      if(generateSvgString) {
+        svgPath += "C" + tmpX1.toStringAsFixed(2) + " " + tmpY1.toStringAsFixed(2)
+            + " " + tmpX2.toStringAsFixed(2) + " " + tmpY2.toStringAsFixed(2)
+            + " " + tmpX3.toStringAsFixed(2) + " " + tmpY3.toStringAsFixed(2);
+      }
       path.moveTo(tmpX, tmpY);
-      svgPath+= "M" + tmpX.toStringAsFixed(2) + " " + tmpY.toStringAsFixed(2);
-
+      if(generateSvgString) {
+        svgPath += "M" + tmpX.toStringAsFixed(2) + " " + tmpY.toStringAsFixed(2);
+      }
       tmpX1 = 0.8 * heartWidth + offsetX;
       tmpX2 = 1.25 * heartWidth + offsetX;
       path.cubicTo(tmpX1, tmpY1, tmpX2, tmpY2, tmpX3, tmpY3);
-      svgPath+= "C" + tmpX1.toStringAsFixed(2) +" " + tmpY1.toStringAsFixed(2)
-          + " " + tmpX2.toStringAsFixed(2) +" " + tmpY2.toStringAsFixed(2)
-          + " " + tmpX3.toStringAsFixed(2) +" " + tmpY3.toStringAsFixed(2);
-      svgPath+="\" fill=\"#ff0000\"/>\n";
-      svg += svgPath;
+      if(generateSvgString) {
+        svgPath += "C" + tmpX1.toStringAsFixed(2) + " " + tmpY1.toStringAsFixed(2)
+            + " " + tmpX2.toStringAsFixed(2) + " " + tmpY2.toStringAsFixed(2)
+            + " " + tmpX3.toStringAsFixed(2) + " " + tmpY3.toStringAsFixed(2);
+        svgPath += "\" fill=\"#ff0000\"/>\n";
+        svg += svgPath;
+      }
       canvas.drawPath(path, paint1);
     }
   }
