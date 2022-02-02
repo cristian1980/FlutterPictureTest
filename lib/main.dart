@@ -9,8 +9,8 @@ import 'raw_picture_render.dart';
 void main() {
   // debugRepaintRainbowEnabled = true;
 
-  const double width = 4096;
-  const double height = 4096;
+  const double width = 1000;
+  const double height = 1000;
   final PictureRecorder recorder = PictureRecorder();
   final Canvas canvas = Canvas(recorder, const Rect.fromLTWH(0,0,width,height));
   canvas.save();
