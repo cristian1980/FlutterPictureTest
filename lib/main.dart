@@ -1,5 +1,3 @@
-
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -99,23 +97,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Container(
-            // color: Colors.cyan,
-
-            child:  InteractiveViewer(
-              minScale: 0.1,
-              maxScale: 20,
-              child: SizedBox(
-                width: width,
-                height: height,
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  alignment: Alignment.center,
-                  clipBehavior: Clip.hardEdge,
-                  child: RawPicture(
-                    picture: picture,
-                    pictureSize: Size(width, height),
-                  ),
+          child: InteractiveViewer(
+            minScale: 0.1,
+            maxScale: 20,
+            child: SizedBox(
+              width: width,
+              height: height,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                alignment: Alignment.center,
+                clipBehavior: Clip.hardEdge,
+                child: RawPicture(
+                  picture: picture,
+                  pictureSize: Size(width, height),
                 ),
               ),
             ),
